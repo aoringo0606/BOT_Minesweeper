@@ -47,6 +47,27 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
         [17, ':eight:'],
         [-1, '[!!:bomb:!!](//ansaikuropedia.org/wiki/%E9%A6%AC%E9%B9%BF)'],
     ])
+    const stamps_large = new Map<number,string>([
+        [0, '!!:zero.ex-large:!!'],
+        [1, '!!:one.ex-large::!!'],
+        [2, '!!:two.ex-large::!!'],
+        [3, '!!:three.ex-large::!!'],
+        [4, '!!:four.ex-large::!!'],
+        [5, '!!:five.ex-large::!!'],
+        [6, '!!:six.ex-large::!!'],
+        [7, '!!:seven.ex-large::!!'],
+        [8, '!!:eight.ex-large::!!'],
+        [9, ':zero.ex-large::'],
+        [10, ':one.ex-large::'],
+        [11, ':two.ex-large::'],
+        [12, ':three.ex-large::'],
+        [13, ':four.ex-large::'],
+        [14, ':five.ex-large::'],
+        [15, ':six.ex-large::'],
+        [16, ':seven.ex-large::'],
+        [17, ':eight.ex-large::'],
+        [-1, '[!!:bomb.ex-large::!!](//ansaikuropedia.org/wiki/%E9%A6%AC%E9%B9%BF)'],
+    ])
     //フィールドの初期化
     const field: number[][] = Array.from({ length: width }, () =>
     Array.from({ length: height }, () => 0)
@@ -154,12 +175,22 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
     }
 
     // メッセージの生成
-    for(let y: number = 0; y < height; y++){
-        for(let x: number = 0; x < width; x++){
-            if(!field[x]) continue;
-            message += stamps.get(field[x][y]) || '!!:question:!!';
+    if(!plainText.includes('large')){
+        for(let y: number = 0; y < height; y++){
+            for(let x: number = 0; x < width; x++){
+                if(!field[x]) continue;
+                message += stamps.get(field[x][y]) || '!!:question:!!';
+            }
+            message += '\n';
         }
-        message += '\n';
+    }else{
+        for(let y: number = 0; y < height; y++){
+            for(let x: number = 0; x < width; x++){
+                if(!field[x]) continue;
+                message += stamps_large.get(field[x][y]) || '!!:question:!!';
+            }
+            message += '\n';
+        }
     }
 
     await api.channels.postMessage(channelId, { content: message, embed: true });
