@@ -19,7 +19,7 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
     //hard  : 30x16, 99mines
     //extreme: 9x9, 67mines
     if (!plainText.includes('easy') && !plainText.includes('normal') && !plainText.includes('hard') && !plainText.includes('extreme')){
-        message = "how to use:\n`@BOT_Minesweeper mode[easy/normal/hard/extreme]```\ndifficulty:\n`easy:\t9x9,\t10 mines\nnormal:\t16x16,\t40 mines\nhard:\t30x16,\t99mines\nextreme:\t9x9,\t67mines(14 safe cells)```";
+        message = "how to use:\n`@BOT_Minesweeper mode[easy/normal/hard/extreme]`\ndifficulty:\n```easy:\t9x9,\t10 mines\nnormal:\t16x16,\t40 mines\nhard:\t30x16,\t99mines\nextreme:\t9x9,\t67mines(14 safe cells)```";
         await api.channels.postMessage(channelId, { content: message, embed: true });
         return;
     }
