@@ -32,6 +32,15 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
         [6, '!!:six:!!'],
         [7, '!!:seven:!!'],
         [8, '!!:eight:!!'],
+        [9, ':zero:'],
+        [10, ':one:'],
+        [11, ':two:'],
+        [12, ':three:'],
+        [13, ':four:'],
+        [14, ':five:'],
+        [15, ':six:'],
+        [16, ':seven:'],
+        [17, ':eight:'],
         [-1, '!!:bomb:!!'],
     ])
     //フィールドの初期化
@@ -98,6 +107,32 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
                 }
             }
             field[x][y] = count;
+        }
+    }
+
+    //ヒントをオープン
+    if(plainText.includes('extreme')) {
+        for(let dx: number = -1; dx <= 1; dx++){
+            for(let dy: number = -1; dy <= 1; dy++){
+                const nx: number = 4 + dx;
+                const ny: number = 4 + dy;
+                if(!field[nx]) continue;
+                if(nx >= 0 && nx < width && ny >= 0 && ny < height){
+                    field[nx][ny] = field[nx][ny] + 9;
+                }
+            }
+        }
+    }else{
+        //ランダムな0を1つオープン
+        let zeroPlaced = 0;
+        while(zeroPlaced < 1){
+            const x: number = Math.floor(Math.random() * width);
+            const y: number = Math.floor(Math.random() * height);
+            if(!field[x]) continue;
+            if(x >= 0 && x < width && y >= 0 && y < height && field[x][y] === 0){
+                field[x][y] = field[x][y] + 9;
+                zeroPlaced++;
+            }
         }
     }
 
