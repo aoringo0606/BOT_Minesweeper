@@ -41,7 +41,7 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
         [15, ':six:'],
         [16, ':seven:'],
         [17, ':eight:'],
-        [-1, '!!:bomb:!!'],
+        [-1, '[!!:bomb:!!](//ansaikuropedia.org/wiki/%E9%A6%AC%E9%B9%BF)'],
     ])
     //フィールドの初期化
     const field: number[][] = Array.from({ length: width }, () =>
