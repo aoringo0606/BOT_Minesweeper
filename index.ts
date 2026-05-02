@@ -124,14 +124,27 @@ client.on('MESSAGE_CREATED', async ({ body }) => {
         }
     }else{
         //ランダムな0を1つオープン
-        let zeroPlaced = 0;
-        while(zeroPlaced < 1){
-            const x: number = Math.floor(Math.random() * width);
-            const y: number = Math.floor(Math.random() * height);
-            if(!field[x]) continue;
-            if(x >= 0 && x < width && y >= 0 && y < height && field[x][y] === 0){
-                field[x][y] = field[x][y] + 9;
-                zeroPlaced++;
+        //もし0がなかったら何もしない
+        let flag = false;
+        for(let x: number = 0; x < width; x++){
+            for(let y: number = 0; y < height; y++){
+                if(!field[x]) continue;
+                if(field[x][y] === 0){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if(flag){
+            let zeroPlaced = 0;
+            while(zeroPlaced < 1){
+                const x: number = Math.floor(Math.random() * width);
+                const y: number = Math.floor(Math.random() * height);
+                if(!field[x]) continue;
+                if(x >= 0 && x < width && y >= 0 && y < height && field[x][y] === 0){
+                    field[x][y] = field[x][y] + 9;
+                    zeroPlaced++;
+                }
             }
         }
     }
